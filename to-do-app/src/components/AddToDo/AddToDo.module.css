@@ -1,0 +1,16 @@
+.AddToDoForm{
+    display: flex;
+    flex: 1;
+    margin: 20px auto;
+}
+.input{
+    width: 80%;
+    margin: 20px 0 0 0;
+    margin-right: 10px;
+
+    
+}
+.btn{
+    margin: 20px 0 0 0;
+    width: 20%;
+}

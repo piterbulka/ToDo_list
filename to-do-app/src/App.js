@@ -3,6 +3,7 @@ import Header from './components/Header/Header'
 import AddToDo from './components/AddToDo/AddToDo'
 import ToDoList from './components/ToDoList/ToDoList.js'
 import { useState } from 'react';
+import { Container } from 'react-bootstrap';
 
 function App() {
 
@@ -25,11 +26,11 @@ function App() {
   ])
 
   return (
-    <div className="App">
+    <Container>
       <Header />
       <AddToDo todo={todo} setTodo={setTodo}/>
       <ToDoList  todo={todo} setTodo={setTodo}/>
-    </div>
+    </Container>
   );
 }
 

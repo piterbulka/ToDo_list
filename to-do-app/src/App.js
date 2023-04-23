@@ -1,6 +1,6 @@
 import './App.css';
-import Header from './components/Header/Header.js'
-import AddToDo from './components/AddToDo/AddToDo.js'
+import Header from './components/Header/Header'
+import AddToDo from './components/AddToDo/AddToDo'
 import ToDoList from './components/ToDoList/ToDoList.js'
 import { useState } from 'react';
 
@@ -23,11 +23,12 @@ function App() {
       status: false
     },
   ])
+
   return (
     <div className="App">
       <Header />
-      <AddToDo />
-      <ToDoList />
+      <AddToDo todo={todo} setTodo={setTodo}/>
+      <ToDoList  todo={todo} setTodo={setTodo}/>
     </div>
   );
 }

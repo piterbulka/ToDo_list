@@ -1,12 +1,26 @@
-import React, { useState } from 'react'
-import { Button, Col, Row, Form } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react'
+import { Button, Col, Row, Form, ButtonGroup } from 'react-bootstrap';
 import s from './ToDoList.module.css'
 
 
 function ToDoList( {todo, setTodo}){
     
     const [edit, setEdit] = useState(null)
-    const [value, setValue]= useState()
+    const [value, setValue]= useState('')
+    const [filtered, setFiltered] = useState(todo)
+
+    useEffect(() => {
+        setFiltered(todo)
+    }, [todo])
+
+    function todoFilter(status){
+        if(status === 'all'){
+            setFiltered(todo)
+        } else {
+            let newTodo = [...todo].filter(item => item.status === status)
+            setFiltered(newTodo)
+        }
+    }
 
     function deleteTodo(id){
         let newTodo = [...todo].filter(item => item.id!=id)
@@ -39,8 +53,14 @@ function ToDoList( {todo, setTodo}){
     }
 
     return(
-        <div>{
-            todo.map( item =>(
+        <div>
+            <ButtonGroup aria-label="Basic example">
+                <Button variant="secondary" onClick={()=>todoFilter('all')}>Все</Button>
+                <Button variant="secondary" onClick={()=>todoFilter(true)}>Текущие</Button>
+                <Button variant="secondary" onClick={()=>todoFilter(false)}>Завершенные</Button>
+            </ButtonGroup>
+            {
+            filtered.map( item =>(
                 <div key={item.id} className={s.listItems}>
                     {
                         edit == item.id ?
@@ -62,7 +82,7 @@ function ToDoList( {todo, setTodo}){
                             <Button variant="outline-danger" onClick={ ()=>editTodo(item.id, item.title) } className= {s.btn} >Редактировать</Button>
                             <Button variant="outline-danger" onClick={ ()=>statusTodo(item.id) } className= {s.btn}>
                             {
-                                item.status ? 'Закрыть' : 'Открыть'
+                                item.status ? 'Завершить' : 'Начать'
                             }   </Button>
                         </div>
                     }
